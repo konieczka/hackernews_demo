@@ -17,21 +17,34 @@ export function ItemsList({
       <ul className="flex w-full flex-col gap-2">
         {items.map((item: Item) => (
           <Link href={`/story/${item.id}`} key={item.id}>
-            <li className="rounded-md border p-2 shadow">
+            <li className="rounded-md border p-2 shadow hover:text-sky-400">
               <strong>{item.title}</strong>
+              <small className="text-xs text-slate-400">
+                &nbsp;by <b>{item.by}</b>
+              </small>
             </li>
           </Link>
         ))}
       </ul>
       <div className="flex min-w-full justify-between">
         {Number(page) > 1 && (
-          <Link className="mr-auto" href={`/${route}/${Number(page) - 1}`}>
-            <button>&lt; Previous Page</button>
+          <Link
+            className="mr-auto hover:text-sky-400"
+            href={`/${route}/${Number(page) - 1}`}
+          >
+            <button>
+              <b className="text-xl">&lt;</b> Previous Page
+            </button>
           </Link>
         )}
         {!isLastPage && (
-          <Link className="ml-auto" href={`/${route}/${Number(page) + 1}`}>
-            <button>Next Page &gt;</button>
+          <Link
+            className="ml-auto hover:text-sky-400"
+            href={`/${route}/${Number(page) + 1}`}
+          >
+            <button>
+              Next Page <b className="text-xl">&gt;</b>
+            </button>
           </Link>
         )}
       </div>
