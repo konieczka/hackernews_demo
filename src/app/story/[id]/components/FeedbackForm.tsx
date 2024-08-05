@@ -65,9 +65,12 @@ export function FeedbackForm({ storyId }: { storyId: number }) {
     e.preventDefault();
 
     if (validateForm()) {
-      await postFeedback(storyId, formData);
-      setFormData(FORM_INITIAL_STATE);
-      setFeedbackSubmitted(true);
+      const response = await postFeedback(storyId, formData);
+
+      if (response === "received") {
+        setFormData(FORM_INITIAL_STATE);
+        setFeedbackSubmitted(true);
+      }
     }
   };
 

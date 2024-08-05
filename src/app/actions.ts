@@ -107,6 +107,6 @@ export async function postFeedback(
   id: number,
   formData: FeedbackFormData,
 ): Promise<string> {
-  console.log(`Form data received for ${id}`, formData);
-  return "Form received";
+  console.log(`Form data received for story ${id}`, formData);
+  return "received";
 }
