@@ -71,3 +71,15 @@ export async function getPageData(page: number, route: StoryRoute) {
 
   return { items, isLastPage } as const;
 }
+
+export interface FeedbackFormData {
+  email: string;
+  username: string;
+  message: string;
+}
+
+export async function postFeedback(id: number, formData: FeedbackFormData) {
+  console.log(`Form data received for ${id}`, formData);
+
+  return "Form received";
+}

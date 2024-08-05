@@ -1,4 +1,5 @@
 import { getItem } from "~/app/actions";
+import { FeedbackForm } from "./components/FeedbackForm";
 
 export default async function StoryPage({
   params,
@@ -33,6 +34,8 @@ export default async function StoryPage({
       </p>
       <p>{new Date(storyData.time * 1000).toUTCString()}</p>
       <p>{storyData.score} points</p>
+
+      <FeedbackForm storyId={Number(params.id)} />
     </div>
   );
 }
