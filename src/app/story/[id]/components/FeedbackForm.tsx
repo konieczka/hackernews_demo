@@ -24,6 +24,15 @@ export function FeedbackForm({ storyId }: { storyId: number }) {
 
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
+  const toggleFeedbackSubmitted = () => setFeedbackSubmitted((prev) => !prev);
+
+  /**
+   * Validates the form data and returns whether the form is valid.
+   *
+   * Checks the email, username, and message fields for validity and updates the errors state accordingly.
+   *
+   * @return {boolean} Whether the form is valid (i.e., no errors).
+   */
   const validateForm = () => {
     const newErrors: { email?: string; name?: string; message?: string } = {};
 
@@ -48,13 +57,19 @@ export function FeedbackForm({ storyId }: { storyId: number }) {
     return Object.keys(newErrors).length === 0;
   };
 
+  /**
+   * Handles the form submission.
+   *
+   * @param {React.FormEvent} e - The form event.
+   * @return {Promise<void>} A promise that resolves when the form submission is complete.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validateForm()) {
       await postFeedback(storyId, formData);
       setFormData(FORM_INITIAL_STATE);
-      setFeedbackSubmitted(true);
+      toggleFeedbackSubmitted();
     }
   };
 
@@ -75,7 +90,7 @@ export function FeedbackForm({ storyId }: { storyId: number }) {
           type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          onFocus={() => setFeedbackSubmitted(false)}
+          onFocus={toggleFeedbackSubmitted}
           onBlur={() => setErrors({ ...errors, email: undefined })}
         />
         {errors.email && <span className="text-red-500">{errors.email}</span>}
@@ -93,7 +108,7 @@ export function FeedbackForm({ storyId }: { storyId: number }) {
           onChange={(e) =>
             setFormData({ ...formData, username: e.target.value })
           }
-          onFocus={() => setFeedbackSubmitted(false)}
+          onFocus={toggleFeedbackSubmitted}
           onBlur={() => setErrors({ ...errors, name: undefined })}
         />
         {errors.name && <span className="text-red-500">{errors.name}</span>}
@@ -110,7 +125,7 @@ export function FeedbackForm({ storyId }: { storyId: number }) {
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
           }
-          onFocus={() => setFeedbackSubmitted(false)}
+          onFocus={toggleFeedbackSubmitted}
           onBlur={() => setErrors({ ...errors, message: undefined })}
         />
         {errors.message && (
