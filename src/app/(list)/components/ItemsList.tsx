@@ -16,9 +16,11 @@ export function ItemsList({
     <>
       <ul className="flex w-full flex-col gap-2">
         {items.map((item: Item) => (
-          <li className="rounded-md border p-2 shadow" key={item.id}>
-            <strong>{item.title}</strong>
-          </li>
+          <Link href={`/story/${item.id}`} key={item.id}>
+            <li className="rounded-md border p-2 shadow">
+              <strong>{item.title}</strong>
+            </li>
+          </Link>
         ))}
       </ul>
       <div className="flex min-w-full justify-between">
