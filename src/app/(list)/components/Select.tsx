@@ -17,6 +17,7 @@ export function Select({ route }: { route: StoryRoute }) {
       defaultValue={route}
       onChange={handleChange}
       className="rounded-md border p-2 text-black"
+      aria-label="Sort by"
     >
       {options.map((option) => (
         <option key={option} value={option}>

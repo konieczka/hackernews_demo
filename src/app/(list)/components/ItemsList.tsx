@@ -16,14 +16,17 @@ export function ItemsList({
     <>
       <ul className="flex w-full flex-col gap-2">
         {items.map((item: Item) => (
-          <Link href={`/story/${item.id}`} key={item.id}>
-            <li className="rounded-md border p-2 shadow hover:text-sky-400">
+          <li key={item.id}>
+            <Link
+              href={`/story/${item.id}`}
+              className="block rounded-md border p-2 shadow hover:text-sky-400"
+            >
               <strong>{item.title}</strong>
               <small className="text-xs text-slate-400">
                 &nbsp;by <b>{item.by}</b>
               </small>
-            </li>
-          </Link>
+            </Link>
+          </li>
         ))}
       </ul>
       <div className="flex min-w-full justify-between">
